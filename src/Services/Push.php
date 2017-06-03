@@ -12,7 +12,6 @@ class Push
         array $uuid,
         array $data = [])
     {
-        return "ok";
         $token = config('ionic-cloud.api_token');
         $profile = config('ionic-cloud.profile');
         $guzzle = new Client([

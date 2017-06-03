@@ -6,4 +6,6 @@ return [
     'api_token' => env('IONIC_CLOUD_API_TOKEN', ''),
     // Your app profile
     'profile' => env('IONIC_CLOUD_PROFILE', ''),
+    // The app_id from your app
+    'app_id' => env('IONIC_CLOUD_APP_ID', ''),
 ];
