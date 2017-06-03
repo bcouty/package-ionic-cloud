@@ -42,8 +42,6 @@ Need to Auth:
 'app_id' => env('IONIC_CLOUD_APP_ID', 'your-app-id'), // for auth service
 ```
 
---------------------
-
 ----------------
 
 [<– Back to start](../readme.md)
