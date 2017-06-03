@@ -1,15 +1,19 @@
-# About Ionic Cloud Package
+# About Ionic Cloud PHP Package
 
 This package help you to work with Ionic Cloud Services. To use, first verify the requirements.
 
-Actually, work only registering users in Auth Service and sending push notifications, but I'm work to add all functions of Ionic Cloud ;-)
+Actually, work only registering users in Auth Service and sending push notifications, but I'm working to add all functions of Ionic Cloud ;-)
 
 The Auth Service of Ionic Cloud is the better way to manager device tokens and sessions of users in your Ionic mobile app. Manager the user session and all device tokens of users loggeds. Using the Auth Service, you can send Push Notifications for all devices easily!
+
+I use this package with ***Laravel Framework*** but you can use with any PHP application.
 
 ## Requirements:
 
 - Laravel >= 5.1;
+- guzzlehttp/guzzle;
 - Create an account in [Ionic IO](https://apps.ionic.io/signup);
+- Have an Ionic Cloud API Token (*In your ionic.io account, access your app > Settings > API Tokens*);
 - Implements [Ionic Cloud features supported](https://docs.ionic.io/services/) - ([Push](https://docs.ionic.io/services/push/) or [Auth](https://docs.ionic.io/services/auth/))in your mobile app;
 - For Push Notifications Service, create and configure a Profile and Certificate in Ionic IO ([for Android](https://docs.ionic.io/services/profiles/#android-fcm-project--server-key) / [for iOS](https://docs.ionic.io/services/profiles/#ios-push-certificate))
 
@@ -23,21 +27,20 @@ Install with composer:
 composer require brunocouty/ionic-cloud
 ```
 
-After the composer require is completed, publish the configuration file:
-
-```
-php artisan vendor:publish --provider="BrunoCouty\IonicCloud\IonicCloudServiceProvider"
-```
-
---------------------
-
-## Configuration
-
 Open "*config/app.php*" and register this package in providers array:
 
 ``` 
 BrunoCouty\IonicCloud\IonicCloudServiceProvider::class,
 ```
+
+Now, publish the configuration file:
+
+```
+php artisan vendor:publish --provider="BrunoCouty\IonicCloud\IonicCloudServiceProvider"
+```
+--------------------
+
+## Configuration
 
 Open "*config/ionic-cloud.php*".
 
@@ -53,6 +56,12 @@ Need to Push Notifications:
 Need to Auth:
 
 - IONIC_CLOUD_APP_ID (*The ID of your app*);
+
+```
+'api_token' => env('IONIC_CLOUD_API_TOKEN', 'your-api-token'), // required!
+'profile' => env('IONIC_CLOUD_PROFILE', 'your-profile-certificates'), // for push notifications
+'app_id' => env('IONIC_CLOUD_APP_ID', 'your-app-id'), // for auth service
+```
 
 --------------------
 
@@ -133,12 +142,12 @@ You need have the *uuid* (*User id*) to send a push notification. With the *uuid
 
 Parameters of method:
 
-- $title: string [**required**];
-- $message: string [**required**];
-- $uuid: array [**required**];
-- $data: array [**optional**] (data that you want send to mobile app);
-- $token: string [**optional**] (for default, the library use the token configured in "*config/ionic-cloud.php*" file, but if you want, can send the token here);
-- $profile: string [**optional**] (for default, the library use the certificate profile configured in "*config/ionic-cloud.php*" file, but if you want, can send the certificate profile here);
+- $title: *string* [**required**];
+- $message: *string* [**required**];
+- $uuid: *array* [**required**];
+- $data: *array* [**optional**] (data that you want send to mobile app);
+- $token: *string* [**optional**] (for default, the library use the token configured in "*config/ionic-cloud.php*" file, but if you want, can send the token here);
+- $profile: *string* [**optional**] (for default, the library use the certificate profile configured in "*config/ionic-cloud.php*" file, but if you want, can send the certificate profile here);
 
 ```
     $push = new \BrunoCouty\IonicCloud\Services\Push();
@@ -171,3 +180,13 @@ $response = $push->send(
                             $profile
                         );
 ```
+
+## Like this content? Pay me a coffee!
+
+Yeah! You like of this package? Pay me a coffee and help me to keep this package updated!
+
+When you are my support, you have access to **exclusive posts** with a lot that cool things about PHP, Laravel, AngularJS, VueJS, Ionic, and much more! You will see haw create your own PHP Packages, resolve mistakes on your code... The great content!
+
+Help me with only $2 / month and you will have access to my private content!
+
+[https://www.patreon.com/brunocouty](https://www.patreon.com/brunocouty)
