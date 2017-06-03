@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 
 class Auth
 {
-    public function register($data)
+    public function register(array $data, string $token = '', string $app_id = '')
     {
         $fields = [];
         foreach ($data as $key => $value) {
@@ -18,8 +18,12 @@ class Auth
             }
             $fields[$key] = $value;
         }
-        $application_token = config('ionic-cloud.token');
-        $app_id = config('ionic-cloud.app_id');
+        if($token == '') {
+            $token = config('ionic-cloud.token');
+        }
+        if($app_id == '') {
+            $app_id = config('ionic-cloud.app_id');
+        }
         $fields['app_id'] = $app_id;
         $data = [
             'json' => [
@@ -28,7 +32,7 @@ class Auth
         ];
         $guzzle = new Client([
             'headers' => [
-                'Authorization' => 'Bearer ' . $application_token,
+                'Authorization' => 'Bearer ' . $token,
                 'Content-Type' => 'form-data',
             ]
         ]);

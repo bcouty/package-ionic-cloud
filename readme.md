@@ -13,8 +13,6 @@ The Auth Service of Ionic Cloud is the better way to manager device tokens and s
 - Implements [Ionic Cloud features supported](https://docs.ionic.io/services/) - ([Push](https://docs.ionic.io/services/push/) or [Auth](https://docs.ionic.io/services/auth/))in your mobile app;
 - For Push Notifications Service, create and configure a Profile and Certificate in Ionic IO ([for Android](https://docs.ionic.io/services/profiles/#android-fcm-project--server-key) / [for iOS](https://docs.ionic.io/services/profiles/#ios-push-certificate))
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
-
 --------------------
 
 ## Installation
@@ -62,14 +60,19 @@ Need to Auth:
 
 ### Register an User
 
-Below, a list of data that can be sended:
+See the list of data that can be sent:
 
+**data** an array with the user data:
 - email [**required**];
 - password [**required**];
 - username [optional];
 - name [optional];
 - image [optional];
 - custom [optional] - custom data array;
+
+**token** and **app_id** are strings with the API Token and APP ID of you app. This is optional. Use **if you need send several different tokens in your application**. If your application use only one app on Ionic Cloud, you not need send this parameter, only configure the vars in "*config/ionic-cloud.php*" file.
+
+Below see an example of register with vars configured in "*config/ionic-cloud.php*" file:
 
 ```
     $auth = new \BrunoCouty\IonicCloud\Services\Auth();
@@ -84,6 +87,25 @@ Below, a list of data that can be sended:
     ];
     $response = $auth->register($data);
 ```
+
+Below, see an example of register in different applications, sending the API Token and App ID on method:
+
+```
+    $auth = new \BrunoCouty\IonicCloud\Services\Auth();
+    $data = [
+        'email' => 'brunocouty@gmail.com',
+        'password' => 'foxtrot',
+        'name' => 'Bruno Couty',
+        'custom' => [
+            'gender' => 'M',
+            'country' => 'Brazil'
+        ]
+    ];
+    $token = 'your-api-token';
+    $app_id = '891IaDs';
+    $response = $auth->register($data, $token, $app_id);
+```
+
 
 If everything it's ok, your will receive as return status 201 with the fields:
 
@@ -103,6 +125,15 @@ If everything it's ok, your will receive as return status 201 with the fields:
 ### Send a Push Notification
 
 You need have the *uuid* (*User id*) to send a push notification. With the *uuid*, this library send a push notification to all devices where the user is logged.
+
+Parameters of method:
+
+- $title: string [**required**];
+- $message: string [**required**];
+- $uuid: array [**required**];
+- $data: array [**optional**] (data that you want send to mobile app);
+- $token: string [**optional**] (for default, the library use the token configured in "*config/ionic-cloud.php*" file, but if you want, can send the token here);
+- $profile: string [**optional**] (for default, the library use the certificate profile configured in "*config/ionic-cloud.php*" file, but if you want, can send the certificate profile here);
 
 ```
     $push = new \BrunoCouty\IonicCloud\Services\Push();
@@ -124,12 +155,14 @@ You need have the *uuid* (*User id*) to send a push notification. With the *uuid
 If you want work with more than one app, you need send the authentication data as parameters in *send* method:
 
 ```
+$token = 'your-token';
+$profile = 'your-profile';
 $response = $push->send(
                             $title, 
                             $message, 
                             $uuid, 
                             $data,
-                            'your-token',
-                            'certificate-profile'
+                            $token,
+                            $profile
                         );
 ```
