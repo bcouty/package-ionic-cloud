@@ -28,7 +28,7 @@ composer require brunocouty/ionic-cloud
 After the composer require is completed, publish the configuration file:
 
 ```
-php artisan vendor:publish --tag=brunocouty/ionic-cloud
+php artisan vendor:publish --provider="BrunoCouty\IonicCloud\IonicCloudServiceProvider"
 ```
 
 --------------------
