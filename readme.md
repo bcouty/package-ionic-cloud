@@ -15,6 +15,8 @@ The Auth Service of Ionic Cloud is the better way to manager device tokens and s
 
 Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
 
+--------------------
+
 ## Installation
 
 Install with composer:
@@ -28,6 +30,8 @@ After the composer require is completed, publish the configuration file:
 ```
 php artisan vendor:publish --tag=brunocouty/ionic-cloud
 ```
+
+--------------------
 
 ## Configuration
 
@@ -51,6 +55,8 @@ Need to Push Notifications:
 Need to Auth:
 
 - IONIC_CLOUD_APP_ID (*The ID of your app*);
+
+--------------------
 
 ## Usage
 
@@ -107,5 +113,23 @@ You need have the *uuid* (*User id*) to send a push notification. With the *uuid
         'foo' => '1',
         'bar' => '2'
     ]; // Some data that you want send throught push notification (optional)
-    $response = $push->send($title, $message, $uuid, $data); // If ok, return 200
+    $response = $push->send(
+                                $title, 
+                                $message, 
+                                $uuid, 
+                                $data // if there's not data, send empty array or delete this parameter
+                            ); // If ok, return 200
+```
+
+If you want work with more than one app, you need send the authentication data as parameters in *send* method:
+
+```
+$response = $push->send(
+                            $title, 
+                            $message, 
+                            $uuid, 
+                            $data,
+                            'your-token',
+                            'certificate-profile'
+                        );
 ```

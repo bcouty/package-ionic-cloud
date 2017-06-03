@@ -10,10 +10,16 @@ class Push
         string $title,
         string $message,
         array $uuid,
-        array $data = [])
+        array $data = [],
+        string $token = '',
+        string $profile = '')
     {
-        $token = config('ionic-cloud.api_token');
-        $profile = config('ionic-cloud.profile');
+        if ($token == '') {
+            $token = config('ionic-cloud.api_token');
+        }
+        if ($profile == '') {
+            $profile = config('ionic-cloud.profile');
+        }
         $guzzle = new Client([
             'headers' => [
                 'Authorization' => 'Bearer ' . $token,
