@@ -13,10 +13,10 @@ class Auth
         foreach ($data as $key => $value) {
             if ($key == 'custom') {
                 foreach ($value as $k => $v) {
-                    $fields[$key][$k] = $v;
+                    $fields['json'][$key][$k] = $v;
                 }
             }
-            $fields[$key] = $value;
+            $fields['json'][$key] = $value;
         }
         if($token == '') {
             $token = config('ionic-cloud.token');
@@ -24,12 +24,8 @@ class Auth
         if($app_id == '') {
             $app_id = config('ionic-cloud.app_id');
         }
-        $fields['app_id'] = $app_id;
-        $data = [
-            'json' => [
-                $fields
-            ]
-        ];
+        $fields['json']['app_id'] = $app_id;
+        $data = $fields;
         $guzzle = new Client([
             'headers' => [
                 'Authorization' => 'Bearer ' . $token,

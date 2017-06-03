@@ -107,7 +107,7 @@ Below, see an example of register in different applications, sending the API Tok
 ```
 
 
-If everything it's ok, your will receive as return status 201 with the fields:
+If everything it's ok, your will receive as return status 200 with the fields:
 
 - data:
      - app_id;
@@ -120,7 +120,12 @@ If everything it's ok, your will receive as return status 201 with the fields:
     - request_id;
     - status;
     - version;
-     
+
+If you want get the ***uuid***, for example, use:
+ 
+```
+$uuid = $response['data']['uuid']; 
+```
 
 ### Send a Push Notification
 
