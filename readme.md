@@ -6,7 +6,7 @@ Actually, work only registering users in Auth Service and sending push notificat
 
 The Auth Service of Ionic Cloud is the better way to manager device tokens and sessions of users in your Ionic mobile app. Manager the user session and all device tokens of users loggeds. Using the Auth Service, you can send Push Notifications for all devices easily!
 
-I use this package with ***Laravel Framework*** but you can use with any PHP application.
+I use this package with ***Laravel Framework*** but you can ***use with any PHP application***!
 
 ## Requirements:
 
