@@ -21,9 +21,9 @@ I use this package with ***Laravel Framework*** but you can ***use with any PHP 
 
 ## Usage
 
-* [Installation / Configuration](/docs/Installation.md)
-* [Ionic Auth (Ionic Authentication Service)](/docs/Auth.md)
-* [Ionic Push (Ionic Push Notification Service)](/docs/PushNotification) 
+* [Installation / Configuration](docs/Installation.md)
+* [Ionic Auth (Ionic Authentication Service)](docs/Auth.md)
+* [Ionic Push (Ionic Push Notification Service)](docs/PushNotification.md) 
 
 ## Like this content? Pay me a coffee!
 
