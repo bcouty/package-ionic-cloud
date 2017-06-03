@@ -51,4 +51,4 @@ $response = $push->send(
 
 ----------------
 
-[<– Back to start](../)
+[<– Back to start](../readme.md)
