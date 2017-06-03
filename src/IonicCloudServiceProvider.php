@@ -8,13 +8,15 @@ class IonicCloudServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        include __DIR__ .  '/routes.php';
+        require_once __DIR__ . '/routes.php';
+        $this->publishes([
+            __DIR__ . '/resources/config/ionic-cloud.php' => config_path('ionic-cloud.php'),
+        ]);
     }
 
     public function register()
     {
-//        $this->app['ionic-cloud'] = $this->app->share(function ($app) {
-//            return new IonicCloud;
-//        });
+
     }
+
 }
