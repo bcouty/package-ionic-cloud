@@ -136,6 +136,127 @@ If you want get the ***uuid***, for example, use:
 $uuid = $response['data']['uuid']; 
 ```
 
+### Retrieve the user data
+
+Method parameters:
+
+- $uuid: *string* [**required**];
+- $token: *string* [optional]
+
+```
+$response = $auth->get($uuid);
+```
+
+Return data:
+
+```
+{  
+   "meta":{  
+      "request_id":"b87f9aae-8fdd-4ab4-ca97-4eb09812117b",
+      "status":200,
+      "version":"2.0.0-beta.0"
+   },
+   "data":{  
+      "app_id":"your-app-id",
+      "social":[  
+          ...
+      ],
+      "groups":[  
+          ...
+      ],
+      "custom":[  
+          ...
+      ],
+      "uuid":"uuid-of-your-user",
+      "details":{  
+         "name":"user-name",
+         "email":"user-email",
+         "username":null,
+         "image":"path-to-image"
+      },
+      "type":"ionic",
+      "created":"2017-06-03T18:23:10Z"
+   }
+}
+```
+
+Get email:
+
+```
+echo $response['data']['email'];
+```
+
+### Update the user data
+
+Method parameters:
+
+- $uuid: *string* [**required**];
+- $data: *array* [**required**];
+- $token *string* [optional];
+
+```
+$data = [
+        'email' => 'brunocouty@gmail.com',
+        'password' => 'foxtrot fired!',
+        'name' => 'Bruno Couty',
+        'custom' => [
+            'gender' => 'M',
+            'country' => 'Brazil'
+        ]
+    ];
+$response = $auth->update($uuid, $data);
+```
+
+Response:
+
+```
+{  
+   "meta":{  
+      "request_id":"b87f9aae-8fdd-4ab4-ca97-4eb09812117b",
+      "status":200,
+      "version":"2.0.0-beta.0"
+   },
+   "data":{  
+      "app_id":"your-app-id",
+      "social":[  
+          ...
+      ],
+      "groups":[  
+          ...
+      ],
+      "custom":[  
+          ...
+      ],
+      "uuid":"uuid-of-your-user",
+      "details":{  
+         "name":"user-name",
+         "email":"user-email",
+         "username":null,
+         "image":"path-to-image"
+      },
+      "type":"ionic",
+      "created":"2017-06-03T18:23:10Z"
+   }
+}
+```
+
+### Delete an user
+
+Method parameters:
+
+- $uuid: *string* [**required**];
+- $token: *string* [optional];
+
+```
+$response = $auth->delete($uuid);
+```
+
+Return:
+
+```
+[]
+```
+
 ### Send a Push Notification
 
 You need have the *uuid* (*User id*) to send a push notification. With the *uuid*, this library send a push notification to all devices where the user is logged.
