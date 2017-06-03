@@ -17,8 +17,6 @@ I use this package with ***Laravel Framework*** but you can ***use with any PHP 
 - Implements [Ionic Cloud features supported](https://docs.ionic.io/services/) - ([Push](https://docs.ionic.io/services/push/) or [Auth](https://docs.ionic.io/services/auth/))in your mobile app;
 - For Push Notifications Service, create and configure a Profile and Certificate in Ionic IO ([for Android](https://docs.ionic.io/services/profiles/#android-fcm-project--server-key) / [for iOS](https://docs.ionic.io/services/profiles/#ios-push-certificate))
 
---------------------
-
 ## Usage
 
 * [Installation / Configuration](docs/Installation.md)
