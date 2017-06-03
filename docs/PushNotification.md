@@ -17,7 +17,7 @@ Parameters of method:
 - $token: *string* [**optional**] (for default, the library use the token configured in "*config/ionic-cloud.php*" file, but if you want, can send the token here);
 - $profile: *string* [**optional**] (for default, the library use the certificate profile configured in "*config/ionic-cloud.php*" file, but if you want, can send the certificate profile here);
 
-```
+```php
     $push = new \BrunoCouty\IonicCloud\Services\Push();
     $title = "New Notification!"; // The notification title (string)
     $message = "You have a new notification!"; // The notification message (string)
@@ -36,7 +36,7 @@ Parameters of method:
 
 If you want work with more than one app, you need send the authentication data as parameters in *send* method:
 
-```
+```php
 $token = 'your-token';
 $profile = 'your-profile';
 $response = $push->send(

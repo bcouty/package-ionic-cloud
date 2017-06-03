@@ -8,7 +8,7 @@ composer require brunocouty/ionic-cloud
 
 Open "*config/app.php*" and register this package in providers array:
 
-``` 
+```php
 BrunoCouty\IonicCloud\IonicCloudServiceProvider::class,
 ```
 
@@ -36,10 +36,13 @@ Need to Auth:
 
 - IONIC_CLOUD_APP_ID (*The ID of your app*);
 
-```
-'api_token' => env('IONIC_CLOUD_API_TOKEN', 'your-api-token'), // required!
-'profile' => env('IONIC_CLOUD_PROFILE', 'your-profile-certificates'), // for push notifications
-'app_id' => env('IONIC_CLOUD_APP_ID', 'your-app-id'), // for auth service
+```php
+<?php
+    return [
+        'api_token' => env('IONIC_CLOUD_API_TOKEN', 'your-api-token'), // required!
+        'profile' => env('IONIC_CLOUD_PROFILE', 'your-profile-certificates'), // for push notifications
+        'app_id' => env('IONIC_CLOUD_APP_ID', 'your-app-id'), // for auth service
+    ];
 ```
 
 ----------------
