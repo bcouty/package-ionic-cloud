@@ -1,6 +1,6 @@
 {
   "name": "brunocouty/ionic-cloud",
-  "description": "Use the IonicCloud services on PHP. Push Notifications, Auth Service ant much more from Ionic Cloud!",
+  "description": "Use the IonicCloud services on PHP. Push Notifications, Auth Service and much more from Ionic Cloud!",
   "authors": [
     {
       "name": "Bruno Couty",
@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-4": {
-      "BrunoCouty\\IonicCloud\\": "src/IonicCloud/"
+      "BrunoCouty\\IonicCloud\\": "src/"
     }
   },
   "license": "MIT"
