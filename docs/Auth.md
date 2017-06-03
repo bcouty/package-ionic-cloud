@@ -20,7 +20,7 @@ See the list of data that can be sent:
 
 Below see an example of register with vars configured in "*config/ionic-cloud.php*" file:
 
-```
+```php
     $auth = new \BrunoCouty\IonicCloud\Services\Auth();
     $data = [
         'email' => 'brunocouty@gmail.com',
@@ -36,7 +36,7 @@ Below see an example of register with vars configured in "*config/ionic-cloud.ph
 
 Below, see an example of register in different applications, sending the API Token and App ID on method:
 
-```
+```php
     $auth = new \BrunoCouty\IonicCloud\Services\Auth();
     $data = [
         'email' => 'brunocouty@gmail.com',
@@ -69,7 +69,7 @@ If everything it's ok, your will receive as return status 200 with the fields:
 
 If you want get the ***uuid***, for example, use:
  
-```
+```php
 $uuid = $response['data']['uuid']; 
 ```
 
@@ -80,13 +80,13 @@ Method parameters:
 - $uuid: *string* [**required**];
 - $token: *string* [optional]
 
-```
+```php
 $response = $auth->get($uuid);
 ```
 
 Return data:
 
-```
+```php
 {  
    "meta":{  
       "request_id":"b87f9aae-8fdd-4ab4-ca97-4eb09812117b",
@@ -119,7 +119,7 @@ Return data:
 
 Get email:
 
-```
+```php
 echo $response['data']['email'];
 ```
 
@@ -131,7 +131,7 @@ Method parameters:
 - $data: *array* [**required**];
 - $token *string* [optional];
 
-```
+```php
 $data = [
         'email' => 'brunocouty@gmail.com',
         'password' => 'foxtrot fired!',
@@ -146,7 +146,7 @@ $response = $auth->update($uuid, $data);
 
 Response:
 
-```
+```php
 {  
    "meta":{  
       "request_id":"b87f9aae-8fdd-4ab4-ca97-4eb09812117b",
@@ -184,13 +184,13 @@ Method parameters:
 - $uuid: *string* [**required**];
 - $token: *string* [optional];
 
-```
+```php
 $response = $auth->delete($uuid);
 ```
 
 Return:
 
-```
+```php
 []
 ```
 
