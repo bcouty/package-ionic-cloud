@@ -1,3 +1,5 @@
+[test](/docs/Auth.md)
+
 # About Ionic Cloud PHP Package
 
 This package help you to work with Ionic Cloud Services. To use, first verify the requirements.
