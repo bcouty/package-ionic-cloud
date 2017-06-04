@@ -1,7 +1,5 @@
 ## Ionic Push Notification Service
 
-------------
-
 The ionic push notification service work send and manager the push notifications from Ionic Cloud.
 
 ### Send a Push Notification
@@ -48,6 +46,61 @@ $response = $push->send(
                             $profile
                         );
 ```
+
+### Paginated listing of Push Notifications for an App
+
+Method parameters:
+
+- $page_size: *int* [optional] - Number of items to return in paginated resulted (set 0 to no limits);
+- $page: *int* [optional] - The page number for paginated (set 1 or nothing to return first page);
+- $token: *string* [optional];
+
+```php
+    $push = new \BrunoCouty\IonicCloud\Services\Push();
+    $response = $push->list(); // or $push->list(0, 1, $token);
+    return $response;
+```
+
+Response status 200:
+
+```php
+{  
+   "data":[  
+      {  
+         "uuid":"uuid-that-received-notification",
+         "config":{  
+            "notification":{  
+               "ios":{  
+                  "content_available":1,
+                  "sound":"default"
+               },
+               "message":"message-sent",
+               "title":"notification-title"
+            },
+            "tokens":[  
+               "token-1",
+               "token-2",
+               "token-3"
+            ],
+            "profile":"certificates-profile"
+         },
+         "created":"2017-05-24T22:53:29.880945+00:00",
+         "status":"open | locked",
+         "state":"notification-state",
+         "app_id":"your-app-id"
+      }
+   ],
+   "meta":{  
+      "request_id":"b14e0a62-2f42-4d0f-cd66-2e2667102931",
+      "version":"2.0.0-beta.0",
+      "status":200
+   }
+}
+
+$notification_id = $response['data'][0]['id'];
+```
+
+
 
 ----------------
 
