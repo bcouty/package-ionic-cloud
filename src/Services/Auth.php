@@ -25,7 +25,7 @@ class Auth
             $fields['json'][$key] = $value;
         }
         if ($token == '') {
-            $token = config('ionic-cloud.token');
+            $token = config('ionic-cloud.api_token');
         }
         if ($app_id == '') {
             $app_id = config('ionic-cloud.app_id');
@@ -53,7 +53,7 @@ class Auth
     public function get(string $uuid, string $token = '')
     {
         if ($token == '') {
-            $token = config('ionic-cloud.token');
+            $token = config('ionic-cloud.api_token');
         }
         $guzzle = new Client([
             'headers' => [
@@ -87,7 +87,7 @@ class Auth
             $fields['json'][$key] = $value;
         }
         if ($token == '') {
-            $token = config('ionic-cloud.token');
+            $token = config('ionic-cloud.api_token');
         }
         $guzzle = new Client([
             'headers' => [
@@ -112,7 +112,7 @@ class Auth
     public function delete(string $uuid, string $token = '')
     {
         if ($token == '') {
-            $token = config('ionic-cloud.token');
+            $token = config('ionic-cloud.api_token');
         }
         $guzzle = new Client([
             'headers' => [
@@ -126,5 +126,35 @@ class Auth
             return $response->getStatusCode();
         }
         return response([], 200);
+    }
+
+    /**
+     * Returns a paginated collection of Users
+     * @param int $page_size
+     * @param int $page
+     * @param string $token
+     * @return int|mixed
+     */
+    public function list(int $page_size = 0, int $page = 1, string $token = '')
+    {
+        if ($token == '') {
+            $token = config('ionic-cloud.api_token');
+        }
+        $page_size_field = '';
+        if ($page_size > 0) {
+            $page_size_field = "&page_size={$page_size}";
+        }
+        $guzzle = new Client([
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
+            ]
+        ]);
+        $response = $guzzle->get("https://api.ionic.io/auth/users?page={$page}{$page_size_field}");
+        if ($response->getStatusCode() != 200) {
+            return $response->getStatusCode();
+        }
+        return json_decode((string)$response->getBody(), true);
     }
 }

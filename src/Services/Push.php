@@ -13,10 +13,10 @@ class Push
      * @param string $token
      * @return int|mixed
      */
-    public function list(int $page_size = 0, int $page = 1,string $token = '')
+    public function listNotifications(int $page_size = 0, int $page = 1,string $token = '')
     {
         if ($token == '') {
-            $token = config('ionic-cloud.token');
+            $token = config('ionic-cloud.api_token');
         }
         $page_size_field = '';
         if($page_size > 0) {
@@ -88,10 +88,16 @@ class Push
         return json_decode((string)$response->getBody(), true);
     }
 
+    /**
+     * Get a Notification
+     * @param string $notification_id
+     * @param string $token
+     * @return int|mixed
+     */
     public function get(string $notification_id, string $token = '')
     {
         if ($token == '') {
-            $token = config('ionic-cloud.token');
+            $token = config('ionic-cloud.api_token');
         }
         $guzzle = new Client([
             'headers' => [
@@ -105,5 +111,30 @@ class Push
             return $response->getStatusCode();
         }
         return json_decode((string)$response->getBody(), true);
+    }
+
+    /**
+     * Delete a notification
+     * @param string $notification_id
+     * @param string $token
+     * @return int|mixed
+     */
+    public function delete(string $notification_id, string $token = '')
+    {
+        if ($token == '') {
+            $token = config('ionic-cloud.api_token');
+        }
+        $guzzle = new Client([
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
+            ]
+        ]);
+        $response = $guzzle->delete("https://api.ionic.io/push/notifications/{$notification_id}");
+        if ($response->getStatusCode() != 204) {
+            return $response->getStatusCode();
+        }
+        return response([], 200);
     }
 }

@@ -57,7 +57,7 @@ Method parameters:
 
 ```php
     $push = new \BrunoCouty\IonicCloud\Services\Push();
-    $response = $push->list(); // or $push->list(0, 1, $token);
+    $response = $push->listNotifications(); // or $push->listNotifications(0, 1, $token);
     return $response;
 ```
 
@@ -67,7 +67,7 @@ Response status 200:
 {  
    "data":[  
       {  
-         "uuid":"uuid-that-received-notification",
+         "uuid":"notification-uuid-(notification-id)",
          "config":{  
             "notification":{  
                "ios":{  
@@ -78,9 +78,9 @@ Response status 200:
                "title":"notification-title"
             },
             "tokens":[  
-               "token-1",
-               "token-2",
-               "token-3"
+               "token-that-received-notification",
+               "token-that-received-notification",
+               "token-that-received-notification"
             ],
             "profile":"certificates-profile"
          },
@@ -100,6 +100,69 @@ Response status 200:
 $notification_id = $response['data'][0]['id'];
 ```
 
+### Get a Notification
+
+Parameters:
+
+* $notification_id: *string* [**required**];
+* $token: *string* [optional];
+
+```php
+$push = new \BrunoCouty\IonicCloud\Services\Push();
+$notification_id = "ff7eb700-0222-19fd-005a-7cb2473d0e11";
+$response = $push->get($notification_id);
+```
+
+Response:
+
+```php
+{  
+   "data":{  
+      "status":"locked",
+      "created":"2017-05-30T17:01:52.672599+00:00",
+      "app_id":"your-app-id",
+      "uuid":"notification-uuid-sent",
+      "state":"enqueued",
+      "config":{  
+         "user_ids":[  
+            "user-uuid"
+         ],
+         "profile":"certificate-profile",
+         "notification":{  
+            "payload":{  
+               "key":"value"
+            },
+            "ios":{  
+               "sound":"default",
+               "content_available":1
+            },
+            "title":"notification-title",
+            "message":"notification-text"
+         }
+      }
+   },
+   "meta":{  
+      "status":200,
+      "request_id":"7e240251-c686-412e-c116-374e97e648f1",
+      "version":"2.0.0-beta.0"
+   }
+}
+```
+
+### Delete a notification
+
+Parameters:
+
+* $notification_id: *string* [**required**];
+* $token: *string* [optional];
+
+```php
+$push = new \BrunoCouty\IonicCloud\Services\Push();
+$notification_id = "ff7eb700-0222-19fd-005a-7cb2473d0e11";
+$response = $push->delete($notification_id);
+```
+
+Response is a status code 200.
 
 
 ----------------

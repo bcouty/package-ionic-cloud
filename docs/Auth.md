@@ -4,19 +4,72 @@
 
 The ionic authentication service work to manager users sessions in your ionic mobile app and the device tokens to send push notifications. Is very simple use this package. See below.
 
+### List Users Registered
+
+Returns a paginated collection of Users
+
+Parameters:
+
+* $page_size: *int* [optional] - Number limit of registers per page (default: 0 - Set 0 to no limit);
+* $page: *int* [optional] - Number of page (default 1);
+* $token: *string* [optional] - The token of your ionic app (if you use this library to work with more than one app);
+
+```php
+$auth = new \BrunoCouty\IonicCloud\Services\Auth();
+$response = $auth->list();
+```
+
+Response:
+
+```php
+{  
+   "meta":{  
+      "status":200,
+      "request_id":"a70f2051-ee71-4671-c625-79ddef059a1f",
+      "version":"2.0.0-beta.0"
+   },
+   "data":[  
+      {  
+         "type":"ionic",
+         "custom":[  
+
+         ],
+         "created":"2017-06-03T18:22:12Z",
+         "groups":[  
+
+         ],
+         "details":{  
+            "username":"user-username",
+            "image":"url",
+            "name":"name",
+            "email":"email"
+         },
+         "uuid":"user-uuid",
+         "social":[  
+
+         ],
+         "app_id":"app-id"
+      }
+   ]
+}
+```
+
 ### Register an User
 
 See the list of data that can be sent:
 
-**data** an array with the user data:
-- email [**required**];
-- password [**required**];
-- username [optional];
-- name [optional];
-- image [optional];
-- custom [optional] - custom data array;
+* $data: *array*:
+    * email [**required**];
+    * password [**required**];
+    * username [optional];
+    * name [optional];
+    * image [optional];
+    * custom [optional] - custom data array;
 
-**token** and **app_id** are strings with the API Token and APP ID of you app. This is optional. Use **if you need send several different tokens in your application**. If your application use only one app on Ionic Cloud, you not need send this parameter, only configure the vars in "*config/ionic-cloud.php*" file.
+* $token: *string* [optional];
+* $app_id: *string* [optional]; 
+
+**Note:** *token* and *app_id* are strings with the API Token and APP ID of you app. This are optional. Use **if you need send several different tokens in your application**. If your application use only one app on Ionic Cloud, you not need send this parameter, only configure the vars in "*config/ionic-cloud.php*" file.
 
 Below see an example of register with vars configured in "*config/ionic-cloud.php*" file:
 
@@ -55,17 +108,37 @@ Below, see an example of register in different applications, sending the API Tok
 
 If everything it's ok, your will receive as return status 200 with the fields:
 
-- data:
-     - app_id;
-     - created;
-     - custom;
-     - details [object];
-     - social [object]
-     - uuid;
-- meta:
-    - request_id;
-    - status;
-    - version;
+```php
+{  
+   "data":{  
+      "app_id":"your-app-id",
+      "social":[  
+
+      ],
+      "created":"2017-06-05T18:31:34Z",
+      "custom":{  
+         "country":"Brazil",
+         "gender":"M"
+      },
+      "type":"ionic",
+      "uuid":"your-user-id",
+      "details":{  
+         "email":"brunocouty@gmail.com",
+         "image":"https:\/\/s3.amazonaws.com\/ionic-api-auth\/users-default-avatar@2x.png",
+         "username":null,
+         "name":"Bruno Couty"
+      },
+      "groups":[  
+
+      ]
+   },
+   "meta":{  
+      "status":201,
+      "version":"2.0.0-beta.0",
+      "request_id":"e8d8341f-5c79-4da6-cd83-32e9d4da451e"
+   }
+}
+```
 
 If you want get the ***uuid***, for example, use:
  
@@ -73,7 +146,7 @@ If you want get the ***uuid***, for example, use:
 $uuid = $response['data']['uuid']; 
 ```
 
-### Retrieve the user data
+### Retrieve data of an user
 
 Method parameters:
 
